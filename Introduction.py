@@ -14,18 +14,21 @@ async def generate_response(question, context):
   model = "gpt-4-0125-preview"
   #model - "gpt-3.5-turbo"
 
-  completion = await client.chat.completions.create(model=model, messages=[{"role": "user", "content": question}, {"role": "system", "content": context}])
+  completion = await client.chat.completions.create(model=model, 
+      messages=[{"role": "user", "content": question}, 
+                {"role": "system", "content": context}])
   return completion.choices[0].message.content
 
 
 async def app():
   st.title("OpenAI Text Generation App")
-  
-  # Text input for user question
-  question = st.text_input("Enter your question:")
-  
+
   # Text area input for the context
   context = st.text_area("Enter the context:")
+
+
+  # Text input for user question
+  question = st.text_input("Enter your question:")
   
   # Button to generate response
   if st.button("Generate Response"):
